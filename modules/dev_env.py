@@ -12,4 +12,4 @@ def emit(writer, **kwargs):
         args["nsightPort"] = kwargs
     modules.ssh.emit(writer, **args)
     writer.emit("COPY contexts/user /opt/user")
-    writer.packages(["emacs-nox", "libc6-dbg", "gdb", "valgrind"])
+    writer.packages(["vim", "locate", "zlib1g-dev", "emacs-nox", "libc6-dbg", "gdb", "valgrind"])

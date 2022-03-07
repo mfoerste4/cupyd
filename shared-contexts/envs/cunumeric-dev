@@ -1,0 +1,26 @@
+
+function find_first() {
+    local file=$1
+    local dir=$2
+    if [ "$file" = "" ]; then
+        echo "USAGE: find_first <file>"
+        return 1
+    fi
+    if [ "$dir" = "" ]; then
+        dir=`pwd`
+    fi
+    "cd" $dir
+    while [ true ]; do
+        if [ -e "$file" ]; then
+            readlink -f $file
+            return 0
+        fi
+        "cd" ..
+        if [ "`pwd`" = "/" ]; then
+            return 1
+        fi
+    done
+}
+
+source activate cunumeric_dev
+alias scratch='cd /home/scratch.mfoerster_gpu/'

@@ -102,9 +102,6 @@ def parseargs():
         help="Only copy the Dockerfile folder")
     parser.add_argument("-path", default="images", type=str,
         help="Path where to find the images")
-    parser.add_argument("-precmd", default=None, type=str,
-        help="Run this command just *before* launching the container. This is "
-        " valid only when the '-run' option is passed.")
     parser.add_argument("-printComments", action="store_true", default=False,
         help="Print the origin of docker commands in the generated Dockerfile")
     parser.add_argument("-privileged", action="store_true", default=False,
@@ -113,7 +110,7 @@ def parseargs():
         help="Pull the image first from a remote registry.")
     parser.add_argument("-push", action="store_true", default=False,
         help="Push the local image to a remote registry.")
-    parser.add_argument("-repo", default="nvcr.io/nvidian/dt-compute/teju85-",
+    parser.add_argument("-repo", default="gitlab-master.nvidia.com:5005/mfoerster/containers/my-",
         type=str, help="Remote registry prefix to pull/push this image from/to")
     parser.add_argument("-run", default=False, action="store_true",
         help="Run the image to launch a container")
@@ -189,9 +186,6 @@ class Runner:
                          "seccomp=unconfined"]
         finalcmd.append(args.img)
         finalcmd += self.__getCmd(args)
-        if args.precmd:
-            print("Running pre-cmd before starting the container...")
-            runcmd(args.precmd)
         dockercmd("run", *finalcmd)
 
     def __get(self, image, *args):
