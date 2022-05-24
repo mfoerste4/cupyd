@@ -5,7 +5,7 @@ import modules.jupyter
 def cunumeric_env(writer, cudaVersionShort):
     short = float(cudaVersionShort)
     repo = "mfoerste4"
-    branch = "branch-22.03"
+    branch = "branch-22.05"
     writer.emit("""RUN wget "https://raw.githubusercontent.com/$repo/cunumeric/$branch/conda/cunumeric_dev.yml" \\
         -O cunumeric_dev.yml && \\
     mamba env create -n cunumeric_dev -f cunumeric_dev.yml && \\

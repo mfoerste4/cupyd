@@ -175,6 +175,7 @@ class Runner:
         finalcmd += self.__getHostIp(args)
         finalcmd += self.__getCapabilities(args)
         finalcmd += self.__getEnvVars(args)
+        finalcmd += ["-e", "NVIDIA_VISIBLE_DEVICES=$NV_GPU"]
         if args.privileged:
             finalcmd.append("--privileged")
         if args.ipc is not None:
