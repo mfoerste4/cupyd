@@ -110,7 +110,7 @@ def parseargs():
         help="Pull the image first from a remote registry.")
     parser.add_argument("-push", action="store_true", default=False,
         help="Push the local image to a remote registry.")
-    parser.add_argument("-repo", default="gitlab-master.nvidia.com:5005/mfoerster/containers/my-",
+    parser.add_argument("-repo", default="gitlab-master.nvidia.com:5005/mfoerster/containers/",
         type=str, help="Remote registry prefix to pull/push this image from/to")
     parser.add_argument("-run", default=False, action="store_true",
         help="Run the image to launch a container")
@@ -375,11 +375,11 @@ class Writer:
             self.emit("""RUN \\
     $cmd env create -n $envName -f $yamlFile && \\
     rm -f $yamlFile && \\
-    $cmd clean --yes --all""", caller=caller, envName=envName, yamlFile=yamlFile)
+    $cmd clean --yes --all""", caller=caller, cmd=cmd, envName=envName, yamlFile=yamlFile)
         else:
             self.emit("""RUN \\
     $cmd env create -n $envName -f $yamlFile && \\
-    $cmd clean --yes --all""", caller=caller, envName=envName, yamlFile=yamlFile)
+    $cmd clean --yes --all""", caller=caller, cmd=cmd, envName=envName, yamlFile=yamlFile)
 
 
 class Builder:
